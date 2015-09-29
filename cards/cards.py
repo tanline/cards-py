@@ -55,7 +55,7 @@ class Deck(object):
         print self.__cards[self.cards_left() - 1]
 
     def deal(self):
-        """Deal a card from the stack.
+        """Deal a card from the top of the deck.
 
         Deals the top card from the deck. Returns a Card object
         """
