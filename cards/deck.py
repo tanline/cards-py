@@ -1,4 +1,5 @@
 import random
+from card import Card
 
 class Deck(object):
 
@@ -22,11 +23,10 @@ class Deck(object):
 
         Creates a deck of playing cards.
         """
-        suits = ["Spades", "Clubs", "Diamonds", "Hearts"]
         deck = []
         i = 1
         while i < 14:
-            for suit in suits:
+            for suit in Card.SUITS:
                 card = Card(suit, i)
                 deck.append(card)
             i = i + 1
