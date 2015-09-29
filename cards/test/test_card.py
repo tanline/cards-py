@@ -1,8 +1,5 @@
 from nose.tools import *
-from cards.cards import *
-def test_deck():
-    deck = Deck()
-    assert_equal(deck.cards_left(), 52)
+from cards.card import *
 
 def test_card():
     a = Card("Spades", 10)
