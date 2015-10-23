@@ -38,3 +38,9 @@ class Card(object):
 
     def __ge__(self, other):
         return self._value >= other._value
+
+    def value(self):
+        return self._value
+
+    def suit(self):
+        return self._suit
