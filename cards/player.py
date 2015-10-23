@@ -3,15 +3,15 @@ class Player(object):
     def __init__(self, name, human=0):
         self._id = 0
         self.name = name
-        self.cpu = human
+        self.human = human
         self._hand = []
         self._hand_size = 0
 
     def set_name(self, name):
         self.name = name
 
-    def set_human(self, val=1):
-        self.cpu = val
+    def set_human(self):
+        self.human = 1
 
     def give_card(self, card):
         self._hand.append(card)
@@ -24,5 +24,5 @@ class Player(object):
     def size_of_hand(self):
         return self._hand_size
 
-    def get_id(self):
+    def id(self):
         return self._id
