@@ -1,7 +1,7 @@
 class Player(object):
 
-    def __init__(self, name, human=0):
-        self._id = 0
+    def __init__(self, name, id=0, human=0):
+        self._id = id
         self.name = name
         self.human = human
         self._hand = []
