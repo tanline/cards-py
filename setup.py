@@ -3,10 +3,10 @@ try:
 except ImportError:
     from distutils.core import setup
 
-config = {
-        'desciption': 'Card Library',
-        'author': 'Tanpreet Grewal',
-        'version': '0.1'
-}
+setup(name='Cards',
+      version='0.1',
+      desciption='Card Library written in Python',
+      author='Tanpreet Grewal',
+      packages=['cards']
+)
 
-setup(**config)
