@@ -1,27 +1,28 @@
 class Player(object):
 
     def __init__(self, name, human=0):
+        self._id = 0
         self.name = name
         self.cpu = human
-        self.__hand = []
-        self.__number_of_cards_in_hand = 0
+        self._hand = []
+        self._hand_size = 0
 
-    def change_name(self, name):
+    def set_name(self, name):
         self.name = name
 
-    def make_human(self):
-        self.cpu = 0
+    def set_human(self, val=1):
+        self.cpu = val
 
-    def make_cpu(self):
-        self.cpu = 1
+    def give_card(self, card):
+        self._hand.append(card)
+        self._hand_size+= 1
 
-    def add_card(self, card):
-        self.__hand.append(card)
-        self.__number_of_cards_in_hand += 1
+    def take_card(self, card):
+        self._hand.remove(card)
+        self._hand_size-= 1
 
-    def remove_card(self, card):
-        self.__hand.remove(card)
-        self.__number_of_cards_in_hand -= 1
+    def size_of_hand(self):
+        return self._hand_size
 
-    def number_of_cards_in_hand(self):
-        self.__number_of_cards_in_hand
+    def get_id(self):
+        return self._id

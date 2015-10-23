@@ -8,7 +8,7 @@ class Deck(object):
 
         Returns a Deck.
         """
-        self.__cards = self.__build_deck()
+        self._cards = self.build_deck()
         self.shuffle()
 
     def cards_left(self):
@@ -16,9 +16,9 @@ class Deck(object):
 
         Returns an integer.
         """
-        return len(self.__cards)
+        return len(self._cards)
 
-    def __build_deck(self):
+    def build_deck(self):
         """Creates a standard 52 card deck, in a non sorted arrangment
 
         Creates a deck of playing cards.
@@ -37,7 +37,7 @@ class Deck(object):
 
         Resets all of the cards and shuffles the deck.
         """
-        self.__cards = self.__build_deck()
+        self._cards = self._build_deck()
         self.shuffle()
 
     def shuffle(self):
@@ -45,18 +45,18 @@ class Deck(object):
 
         Shuffles the deck of card using the standard shuffle method
         """
-        random.shuffle(self.__cards)
+        random.shuffle(self._cards)
 
     def peek(self):
         """Print the card at the top of the deck
 
         Prints the name of the card that is at the top of the deck.
         """
-        print self.__cards[self.cards_left() - 1]
+        return self._cards[self.cards_left() - 1]
 
     def deal(self):
         """Deal a card from the top of the deck.
 
         Deals the top card from the deck. Returns a Card object
         """
-        return self.__cards.pop()
+        return self._cards.pop()
