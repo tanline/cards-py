@@ -1,5 +1,4 @@
 class Card(object):
-
     SUITS = ["Spades", "Clubs", "Diamonds", "Hearts"]
 
     def __init__(self, suit, value):

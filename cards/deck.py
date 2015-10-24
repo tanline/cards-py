@@ -2,7 +2,6 @@ import random
 from card import Card
 
 class Deck(object):
-
     def __init__(self):
         """Creates a standard 52 card deck, and shuffles it into a randomized order
 
