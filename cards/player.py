@@ -1,5 +1,4 @@
 class Player(object):
-
     def __init__(self, name, id=0, human=0):
         self._id = id
         self.name = name
@@ -17,9 +16,17 @@ class Player(object):
         self._hand.append(card)
         self._hand_size+= 1
 
+    def add_card_to_bottom(self, card):
+        self._hand.insert(0, card)
+        self._hand_size+= 1
+
     def take_card(self, card):
         self._hand.remove(card)
         self._hand_size-= 1
+
+    def take_top_card(self):
+        self._hand_size-= 1
+        return self._hand.pop()
 
     def size_of_hand(self):
         return self._hand_size
