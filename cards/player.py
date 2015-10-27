@@ -12,13 +12,16 @@ class Player(object):
     def set_human(self):
         self.human = 1
 
-    def give_card(self, card):
-        self._hand.append(card)
+    def give_card(self, card, place_at_bottom=0):
+        if place_at_bottom:
+            self._hand.insert(0, card)
+        else:
+            self._hand.append(card)
         self._hand_size+= 1
 
-    def add_card_to_bottom(self, card):
-        self._hand.insert(0, card)
-        self._hand_size+= 1
+    def give_cards(self, cards, place_all_at_bottom=0):
+        for card in cards:
+            self.give_card(card, place_all_at_bottom)
 
     def take_card(self, card):
         self._hand.remove(card)
