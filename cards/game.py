@@ -3,6 +3,8 @@ from deck import Deck
 
 class Game(object):
     def __init__(self, deck):
+        self._min_players = 1
+        self._max_players = 4
         self._players = {}
         self.deck = deck
 
@@ -19,15 +21,19 @@ class Game(object):
         raise NotImplementedError
 
     def all_players_still_have_cards(self):
-        return 0 if self.number_of_players() == 0
-        for _p_id, p_obj in self._players.iteritems():
-            return 0 if (p_obj['player'].size_of_hand() > 0)
-        return 1
+        if (self.number_of_players() == 0):
+            return 0
+        else:
+            for _p_id, p_obj in self._players.iteritems():
+                if (p_obj['player'].size_of_hand() > 0):
+                    return 0
+            return 1
 
 class War(Game):
     def __init__(self):
         Game.__init__(self, Deck())
         self._max_players = 2
+        self._min_players = 2
         self._player_order = []
 
     def start_game(self):
@@ -60,13 +66,45 @@ class War(Game):
             p1_card = self._players[0]['player'].take_top_card()
             p2_card = self._players[1]['player'].take_top_card()
             if (p1_card > p2_card):
-                self._players[0]['player'].add_card_to_bottom(p1_card)
-                self._players[0]['player'].add_card_to_bottom(p2_card)
+                self._players[0]['player'].give_card(p1_card, 1)
+                self._players[0]['player'].give_card(p2_card, 1)
             elif (p2_card > p1_card):
-                self._players[1]['player'].add_card_to_bottom(p2_card)
-                self._players[1]['player'].add_card_to_bottom(p1_card)
+                self._players[1]['player'].give_card(p1_card, 1)
+                self._players[1]['player'].give_card(p2_card, 1)
             else:
                 self.begin_war()
+
+        if (self._players[0]['player'].size_of_hand() ==  0):
+            print "Your Winner is....." + self._players[0]['player'].name + "!!!"
+        else:
+            print "Your Winner is....." + self._players[1]['player'].name + "!!!"
+
+    # TODO: Improve design of this method
+    def begin_war(self):
+        face_up_p1 = self._players[0]['player'].take_top_card()
+        face_up_p2 = self._players[1]['player'].take_top_card()
+        face_down_p1 = self._players[0]['player'].take_top_card()
+        face_down_p2 = self._players[1]['player'].take_top_card()
+
+        prize = [face_up_p1, face_up_p2, face_down_p1, face_down_p2]
+
+        if (face_up_p1 > face_up_p2):
+            self._players[0]['player'].give_cards(prize, 1)
+            return 0
+        elif (face_up_p2 > face_up_p1):
+            self._players[1]['player'].give_cards(prize, 1)
+            return 1
+        else:
+            if (face_down_p1 > face_down_p2):
+                self._players[0]['player'].give_cards(prize, 1)
+                return 0
+            elif (face_down_p2 > face_down_p1):
+                self._players[1]['player'].give_cards(prize, 1)
+                return 1
+            else:
+                winner_index = self.begin_war()
+                self._players[winner_index]['player'].give_cards(prize, 1)
+                return winner_index
 
     def deal_cards(self):
         while (self.deck.cards_left() > 0):
